@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Artisan;
 
 Route::get('/cache-clear', function () {
-    Artisan::call('optimzie:clear');
+    Artisan::call('optimize:clear');
     return "Cache is cleared";
 });
 

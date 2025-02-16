@@ -18,6 +18,7 @@ class StoryResource extends JsonResource
             'id' => $this->id,
             'title' => $this->title,
             'story' => $this->story,
+            'category' => $this->category,
             'image'   => $this->image ? asset('storage/' . $this->image) : "",
             'audio' => $this->audio ? asset('storage/' . $this->audio) : "",
             'created_at' => $this->created_at->toDateTimeString()

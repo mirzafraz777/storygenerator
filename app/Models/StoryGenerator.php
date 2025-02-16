@@ -9,6 +9,7 @@ class StoryGenerator extends Model
     protected $fillable = [
         'title',
         'story',
+        'category',
         'image',
         'audio'
     ];
