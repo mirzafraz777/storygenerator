@@ -14,12 +14,13 @@ class StoryGeneratorController extends Controller
 {
     use HttpResponses;
 
-    public function index(): JsonResponse
+    public function index()
     {
         $stories = Cache::remember('stories', 60, function () {
-            return StoryGenerator::latest()->paginate(10);
+            return StoryGenerator::latest()->get();
         });
-        return $this->success(StoryResource::collection($stories)->response()->getData(true), 'Stories Details Fetched Successfully.', 200);
+        // return StoryResource::collection($stories);
+        return $this->success(StoryResource::collection($stories)->response()->getData(true), 'Stories Details Fetched Successfully.', 200,'stories');
     }
 
     public function store(StoryRequest $request): JsonResponse
