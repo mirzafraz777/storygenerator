@@ -24,7 +24,7 @@ class StoryRequest extends FormRequest
         return [
             'title' => 'bail|required|string|max:255',
             'story' => 'bail|required|string|max:10000',
-            'category' => 'bail|required|string',
+            'category_id' => 'bail|required|exists:categories,id', // Ensure category exists in DB
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:4096',
             // 'audio' => 'nullable|mimes:mpga,wav|max:20000',
             'audio'   => 'nullable|mimes:mp3,wav,ogg|max:6144' // Accepts MP3, WAV, OGG (Max: 6MB)
