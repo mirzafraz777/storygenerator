@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Landing Page</title>
-        <!-- Fonts -->
+    <title>{{ config('app.name') ?? "Laravel" }}</title>
+    <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.bunny.net">
         <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
 
@@ -20,7 +20,7 @@
     <!-- Navbar -->
     <nav class="bg-white shadow-md p-4">
         <div class="container mx-auto flex justify-between items-center">
-            <a href="#" class="text-2xl font-bold text-blue-600">Story Teller</a>
+            <a href="#" class="text-2xl font-bold text-blue-600">{{ config('app.name') ?? "Laravel" }}</a>
             <div>
                 <a href="#" class="px-4 text-gray-600 hover:text-blue-600">Home</a>
                 <a href="#" class="px-4 text-gray-600 hover:text-blue-600">Features</a>
@@ -129,7 +129,7 @@
 
     <!-- Footer -->
     <footer class="bg-gray-800 text-white text-center py-4">
-        <p>© 2025 Story Teller. All Rights Reserved.</p>
+        <p>© 2025 {{ config('app.name') ?? "Laravel" }}. All Rights Reserved.</p>
     </footer>
 
 </body>
