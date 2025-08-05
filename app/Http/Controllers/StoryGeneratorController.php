@@ -6,7 +6,9 @@ use App\Traits\HttpResponses;
 use App\Models\StoryGenerator;
 use Illuminate\Http\JsonResponse;
 use App\Http\Requests\StoryRequest;
+use Illuminate\Support\Facades\Log;
 use App\Http\Resources\StoryResource;
+use App\Models\Category;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Storage;
 
@@ -16,11 +18,20 @@ class StoryGeneratorController extends Controller
 
     public function index()
     {
-        $stories = Cache::remember('stories', 60, function () {
-            return StoryGenerator::latest()->get();
+        if(request()->has('page')){
+            $page = request()->input('page',1);
+            $cacheKey = "stories_page_{$page}";
+            
+        }else{
+            $cacheKey = "stories";
+
+        }
+        $stories = Cache::remember($cacheKey, now()->addMinutes(10), function () {
+            // Log::info("Fetching posts from database for page: " . request()->input('page', 1));
+            return StoryGenerator::with('category')->get();
         });
         // return StoryResource::collection($stories);
-        return $this->success(StoryResource::collection($stories)->response()->getData(true), 'Stories Details Fetched Successfully.', 200,'stories');
+        return $this->success(StoryResource::collection($stories)->response()->getData(true), 'Stories Details Fetched Successfully.', 200);
     }
 
     public function store(StoryRequest $request): JsonResponse
@@ -53,7 +64,7 @@ class StoryGeneratorController extends Controller
         if (! $story) {
             return $this->error(json_decode('{}'), 'No Story Found.', 404);
         }
-        return $this->success(new StoryResource(Cache::remember("story_{$story->id}", 60, function () use ($story) {
+        return $this->success(new StoryResource(Cache::remember("story_{$story->id}", now()->addMinutes(60), function () use ($story) {
             return $story;
         })), 'Story Details Fetched Successfully.', 200);
     }
@@ -114,4 +125,15 @@ class StoryGeneratorController extends Controller
 
         return $this->success('', 'Story Deleted Successfully.', 200);
     }
+
+    public function getCategoryWithStory()
+    {
+        return Category::query()
+            ->with(['stories'=>function ($query){
+                return $query->limit(5)->latest();
+            }])
+            ->orderBy('created_at', 'desc')
+            ->get();
+    }
+
 }

@@ -4,14 +4,15 @@ namespace App\Traits;
 
 trait HttpResponses
 {
-    protected function success($data, $message = null, $code = 200, $model = 'data')
+    protected function success($data, $message = null, $code = 200)
     {
         return response()->json([
             'status' => true,
             'message' => $message,
-            $model => [
-                'children'=>$data
-            ]
+            'data' => $data
+            // $model => [
+            //     'children'=>$data
+            // ]
         ], $code);
     }
 
