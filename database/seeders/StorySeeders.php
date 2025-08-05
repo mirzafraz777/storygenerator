@@ -32,7 +32,9 @@ class StorySeeders extends Seeder
                 'story'       => $faker->paragraph(5),
                 'category_id' => $faker->randomElement($categoryIds), // Assign random category
                 'image'       => 'stories/images/'.$faker->bothify('????-####').'.png', // Fake image URL
+                'image_url'   => 'https://picsum.photos/seed/'.$faker->randomNumber().'/640/480', // Example image URL
                 'audio'       => 'stories/audios/'.'audio_' . $i . '.mp3', // Example audio file name
+                'audio_url'   => 'https://example.com/audio/audio_' . $i . '.mp3', // Example audio URL
             ]);
         }
     }
