@@ -11,6 +11,8 @@ class StoryGenerator extends Model
         'story',
         'category',
         'image',
-        'audio'
+        'image_url',
+        'audio',
+        'audio_url',
     ];
 }

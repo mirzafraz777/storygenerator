@@ -26,9 +26,11 @@ class StoryRequest extends FormRequest
             'story' => 'bail|required|string|max:10000',
             'category' => 'bail|required|string',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:4096',
+            'image_url' => 'nullable|url|max:2048',
             // 'audio' => 'nullable|mimes:mpga,wav|max:20000',
-            'audio'   => 'nullable|mimes:mp3,wav,ogg|max:6144' // Accepts MP3, WAV, OGG (Max: 6MB)
-
+            'audio'   => 'nullable|mimes:mp3,wav,ogg|max:6144', // Accepts MP3, WAV, OGG (Max: 6MB)
+            'audio_url' => 'nullable|url|max:2048'
+            
         ];
     }
 

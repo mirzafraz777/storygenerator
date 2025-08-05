@@ -1,4 +1,3 @@
-
 <?php
 
 use Illuminate\Database\Migrations\Migration;
@@ -13,7 +12,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('story_generators', function (Blueprint $table) {
-            $table->string('category')->after('story')->default('uncategorized');
+            $table->string('image_url')->nullable()->after('image');
+            $table->string('audio_url')->nullable()->after('audio');
         });
     }
 
@@ -23,7 +23,8 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('story_generators', function (Blueprint $table) {
-            $table->dropColumn('category');
+            $table->dropColumn('image_url');
+            $table->dropColumn('audio_url');
         });
     }
 };
